@@ -1,4 +1,3 @@
-import imp
 import pandas as pd
 import sqlite3
 import json
@@ -19,8 +18,12 @@ def create_db():
         cur.execute(
             'CREATE TABLE IF NOT EXISTS data (id TEXT media_type TEXT name TEXT short_name TEXT long_description TEXT short_description TEXT created_at TEXT updated_at TEXT review_url TEXT review_score TEXT slug TEXT genres TEXT created_by TEXT published_by TEXT franchises TEXT regions TEXT)')
         db.commit()
-    db.row_factory = sqlite3.Row
+    df.to_sql(db, cur, if_exists='append', index=False)
+    #db.row_factory = sqlite3.Row
+    
     return db
+
+create_db()
 
 
 
