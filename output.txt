@@ -1,0 +1,1 @@
+id,media_type,name,short_name,long_description,short_description,created_at,updated_at,review_url,review_score,slug,genres,created_by,published_by,franchises,regions
