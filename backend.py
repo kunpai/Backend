@@ -1,8 +1,6 @@
-from crypt import methods
-from gc import get_debug
 import sqlite3
-from aiohttp import request
-from flask import Flask
+import requests
+from flask import Flask, request, jsonify
 import pandas as pd
 
 ## ----------------------------------------- ##
@@ -34,5 +32,5 @@ app = Flask(__name__)
 def getDetails():
     title = request.get_json()['title']
     cur = DATABASE.cursor()
-    
+
 
