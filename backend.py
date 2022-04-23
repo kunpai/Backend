@@ -1,8 +1,9 @@
 import sqlite3
 from unicodedata import name
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 import pandas as pd
+import json
 
 ## ----------------------------------------- ##
 ## Putting data into SQLite3 database
@@ -48,9 +49,10 @@ def getDetails():
                 'genres': row['genres']
             }
             results.append(row)
-        return results
+        return Response(json.dumps(results),  mimetype='application/json')
+
     else:
-        return None
+        return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
 
 
 ## ----------------------------------------- ##
