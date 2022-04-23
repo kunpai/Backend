@@ -1,4 +1,8 @@
+from crypt import methods
+from gc import get_debug
 import sqlite3
+from aiohttp import request
+from flask import Flask
 import pandas as pd
 
 ## ----------------------------------------- ##
@@ -20,4 +24,15 @@ for row in df.itertuples():
 connection.commit()
 
 ## ----------------------------------------- ##
+# Creating Flask app
+
+app = Flask(__name__)
+
+## ----------------------------------------- ##
+
+@app.route("/details", methods= ['GET', 'POST'])
+def getDetails():
+    title = request.get_json()['title']
+    cur = DATABASE.cursor()
+    
 
