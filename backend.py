@@ -45,8 +45,10 @@ def getDetails():
                 'media_type' : row['media_type'],
                 'name' : row['name'],
                 'short_description' : row['short_description'],
-                'long_description': row['long_description'],
-                'genres': row['genres']
+                'long_description' : row['long_description'],
+                'genres' : row['genres'],
+                'ratings' : row['ratings'],
+                'review_url' : row['review_url']
             }
             results.append(row)
         return Response(json.dumps(results),  mimetype='application/json')
@@ -73,9 +75,10 @@ def getRecommend():
                 'media_type' : row['media_type'],
                 'name' : row['name'],
                 'short_description' : row['short_description'],
-                'long_description': row['long_description'],
-                'genres': row['genres'],
-                'ratings': row['ratings']
+                'long_description' : row['long_description'],
+                'genres' : row['genres'],
+                'ratings' : row['ratings'],
+                'review_url' : row['review_url']
             }
             results.append(row)
         return Response(json.dumps(results),  mimetype='application/json')
@@ -85,8 +88,37 @@ def getRecommend():
 
 ## ----------------------------------------- ##
 
+# Takes in a publisher and a media type
+# Returns everything that fulfils those two parameters
+
+@app.route("/api/recommend", methods= ['GET', 'POST'])
+def getPublished():
+    media_type = request.get_json()['media_type']
+    published_by = request.get_json()['published_by']
+    cur = DATABASE.cursor()
+    cur.execute("SELECT * FROM data WHERE media_type LIKE %?% AND published_by LIKE %?% ", (media_type.title(), published_by.title()))
+    rows = cur.fetchall()
+    results = []
+    if len(rows)>0:
+        for row in rows:
+            row = {
+                'media_type' : row['media_type'],
+                'name' : row['name'],
+                'short_description' : row['short_description'],
+                'long_description' : row['long_description'],
+                'genres' : row['genres'],
+                'ratings' : row['ratings'],
+                'published_by' : row['published_by'],
+                'review_url' : row['review_url']
+            }
+            results.append(row)
+        return Response(json.dumps(results),  mimetype='application/json')
+
+    else:
+        return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
 
 ## ----------------------------------------- ##
+
 # Running the application
 
 if __name__ == "__main__":
