@@ -32,11 +32,11 @@ app = Flask(__name__)
 # Creating API endpoint that returns a name, media type, genre, and descriptions
 # Functions as a search
 
-@app.route("/details", methods= ['GET', 'POST'])
+@app.route("/api/details", methods= ['GET', 'POST'])
 def getDetails():
     name = request.get_json()['slug']
     cur = DATABASE.cursor()
-    cur.execute("SELECT * FROM data WHERE name LIKE ? or short_name LIKE ?", (name.lower().replace(' ','-'), name.lower().replace(' ','-')))
+    cur.execute("SELECT * FROM data WHERE slug LIKE ?", (name.lower().replace(' ','-')))
     rows = cur.fetchall()
     results = []
     if len(rows)>0:
@@ -53,6 +53,37 @@ def getDetails():
 
     else:
         return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
+
+## ----------------------------------------- ##
+
+# Takes in a genre and a media type
+# Returns everything that fulfils those two parameters
+
+@app.route("/api/recommend", methods= ['GET', 'POST'])
+def getRecommend():
+    media_type = request.get_json()['media_type']
+    genre = request.get_json()['genres']
+    cur = DATABASE.cursor()
+    cur.execute("SELECT * FROM data WHERE media_type LIKE ? AND genres LIKE %?%", (media_type.title(), genre.title()))
+    rows = cur.fetchall()
+    results = []
+    if len(rows)>0:
+        for row in rows:
+            row = {
+                'media_type' : row['media_type'],
+                'name' : row['name'],
+                'short_description' : row['short_description'],
+                'long_description': row['long_description'],
+                'genres': row['genres'],
+                'ratings': row['ratings']
+            }
+            results.append(row)
+        return Response(json.dumps(results),  mimetype='application/json')
+
+    else:
+        return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
+
+## ----------------------------------------- ##
 
 
 ## ----------------------------------------- ##
