@@ -80,13 +80,12 @@ async def _publisher(ctx=SlashContext, *, type = None, publisher = None):
             embed.add_field(name=publisher, value=f"> Title: {c['name']}\n> Media Type: {c['media_type']}\n> \
                 Description: {c['short_description']}\n> Genres: {c['genres']}\n> Ratings: {c['ratings']}\n> Review URL: {c['review_url']}", inline=False)
         await ctx.send(embed=embed)
-
     except Exception as e:
         print(e)
         notfound = discord.Embed(title="Media not found", color=0x00ff00)
         return await ctx.send(embed=notfound)
 
-@slash.slash(name="add", description="Adds media to your wishlist")
+@slash.slash(name="add_media", description="Adds media to your wishlist")
 async def _add(ctx=SlashContext, *, media=None):
     await ctx.send(embed=discord.Embed(title="Fetching information", description="", color=0xff0000))
     link = "http://127.0.0.1:5000/api/details"
@@ -108,6 +107,18 @@ async def _add(ctx=SlashContext, *, media=None):
         print(e)
         notfound = discord.Embed(title="Media not found", color=0x00ff00)
         return await ctx.send(embed=notfound)
+
+@slash.slash(name="view_media", description="View media in your wishlist")
+async def _view(ctx=SlashContext):
+    embed = discord.Embed(
+            title="Wishlist", description="", color=0xff0000)
+    embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
+    array = wishlist.get(ctx.author)
+    for c in array:
+        print(c)
+        embed.add_field(name=c['name'], value=f"> Title: {c['name']}\n> Media Type: {c['media_type']}\n> \
+                Description: {c['short_description']}\n> Genres: {c['genres']}\n> Ratings: {c['ratings']}\n> Review URL: {c['review_url']}", inline=False)
+    await ctx.send(embed=embed)
 
 
 client.run(os.environ['TOKEN'])
