@@ -1,7 +1,7 @@
 import sqlite3
 from unicodedata import name
 import requests
-from flask import Flask, request, jsonify, Response
+from flask import Flask, g, request, jsonify, Response
 import pandas as pd
 import json
 
@@ -91,7 +91,7 @@ def getRecommend():
 # Takes in a publisher and a media type
 # Returns everything that fulfils those two parameters
 
-@app.route("/api/recommend", methods= ['GET', 'POST'])
+@app.route("/api/publisher", methods= ['GET', 'POST'])
 def getPublished():
     media_type = request.get_json()['media_type']
     published_by = request.get_json()['published_by']
