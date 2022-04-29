@@ -25,7 +25,7 @@ where row is the extraction from the SQLite Database.
 
 Here are the endpoints on the API and what they do:
 
-**Definition**
+1. **Definition**
 
 `GET`, `POST`
 
@@ -60,7 +60,7 @@ Any string entered is converted into a slug using the string function ```.lower(
 ]
 ```
 
-**Definition**
+2. **Definition**
 
 `GET`, `POST`
 
@@ -96,7 +96,7 @@ Any string entered is converted into the correct format using the string functio
 ]
 ```
 
-**Definition**
+3. **Definition**
 
 `GET`, `POST`
 
@@ -133,7 +133,7 @@ Any string entered is converted into the correct format using the string functio
 ]
 ```
 
-**Definition**
+4. **Definition**
 
 `GET`, `POST`
 
@@ -169,7 +169,7 @@ Any string entered is converted into the correct format using the string functio
 ]
 ```
 
-**Definition**
+5. **Definition**
 
 `GET`, `POST`
 
