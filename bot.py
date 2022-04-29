@@ -127,7 +127,7 @@ async def _view(ctx=SlashContext):
 @slash.slash(name="franchise", description="Search a franchise by media type")
 async def _franchise(ctx=SlashContext, *, franchise = None, media = None):
     await ctx.send(embed=discord.Embed(title="Fetching information", description="", color=0xff0000))
-    link = "http://127.0.0.1:5000/api/franchise"
+    link = "http://127.0.0.1:5000/api/mediafranchise"
     try:
         retjson = requests.post(url=link, json={"franchise": franchise, "media_type": media})
         retjson = retjson.json()

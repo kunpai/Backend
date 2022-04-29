@@ -29,7 +29,7 @@ Here are the endpoints on the API and what they do:
 
 `GET`, `POST`
 
-**\api\details**
+**/api/details**
 
 This endpoint takes in a title, converts it into a slug, and checks if any entry in the database fulfils the query.
 
@@ -64,7 +64,7 @@ Any string entered is converted into a slug using the string function ```.lower(
 
 `GET`, `POST`
 
-**\api\recommend**
+**/api/recommend**
 
 This endpoint takes in a type of media (Movie, Game, etc.) and a Genre, and returns media that fulfils both categories.
 
@@ -100,7 +100,7 @@ Any string entered is converted into the correct format using the string functio
 
 `GET`, `POST`
 
-**\api\publisher**
+**/api/publisher**
 
 This endpoint takes in a type of media (Movie, Game, etc.) and a Publisher, and returns media that fulfils both categories.
 
@@ -137,7 +137,7 @@ Any string entered is converted into the correct format using the string functio
 
 `GET`, `POST`
 
-**\api\franchise**
+**/api/franchise**
 
 This endpoint takes in a Franchise, and returns media that fulfils that category.
 
@@ -173,7 +173,7 @@ Any string entered is converted into the correct format using the string functio
 
 `GET`, `POST`
 
-**\api\mediafranchise**
+**/api/mediafranchise**
 
 This endpoint takes in a type of media (Movie, Game, etc.) and a Publisher, and returns media that fulfils both categories.
 
@@ -211,5 +211,35 @@ Any string entered is converted into the correct format using the string functio
 
 As an application of the backend server, I designed a Discord bot that uses the database and slash commands to become a media searcher and recommender. I also implemented a wishlist where users can add the media they like and view them later (Watch Later?).
 
+1. **Definition**
+
+**/search**
+
+This command converts an entered string into a slug, and uses ```/api/details``` to get the results from the database.
+
 ![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/Search.png?raw=true "search")
+
+2. **Definition**
+
+**/recommend**
+
+This command converts an entered media type and genre into a title, and uses ```/api/recommend``` to get the results from the database.
+
+![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/Recommend.png?raw=true "recommend")
+
+3. **Definition**
+
+**/publisher**
+
+This command converts an entered media type and publisher into a title, and uses ```/api/publisher``` to get the results from the database.
+
+![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/Publisher.png?raw=true "publisher")
+
+4. **Definition**
+
+**/franchise**
+
+This command converts an entered media type and franchise into a title, and uses ```/api/mediafranchise``` to get the results from the database.
+
+![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/Franchises.png?raw=true "franchises")
 
