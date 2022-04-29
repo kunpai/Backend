@@ -23,16 +23,6 @@ for row in df.itertuples():
 
 connection.commit()
 
-def get_db():
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-        cur = db.cursor()
-        create_table = "CREATE TABLE IF NOT EXISTS data (id NUMBER, media_type TEXT, name TEXT, short_name TEXT, long_description TEXT, short_description TEXT, created_at TEXT, updated_at TEXT, review_url TEXT, review_score NUMBER, slug TEXT, genres TEXT, created_by TEXT, published_by TEXT, franchises TEXT, regions TEXT)"
-        cur.execute(create_table)
-        db.commit()
-    db.row_factory = sqlite3.Row
-    return db
 
 ## ----------------------------------------- ##
 # Creating Flask app
@@ -214,6 +204,7 @@ def getMediaFranchise():
     else:
         return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
 
+## ----------------------------------------- ##
 
 # Running the application
 
