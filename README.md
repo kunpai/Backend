@@ -2,7 +2,7 @@
 For Code Foo IGN
 Using the .csv file given, I created a Backend server on Flask using SQLite as the database
 
-## Usage
+## Usage of Backend Server
 
 All responses will have the form
 
@@ -206,6 +206,10 @@ Any string entered is converted into the correct format using the string functio
 ]
 ```
 
+
+## Usage of Discord Bot
+
+As an application of the backend server, I designed a Discord bot that uses the database and slash commands to become a media searcher and recommender. I also implemented a wishlist where users can add the media they like and view them later (Watch Later?).
 
 
 

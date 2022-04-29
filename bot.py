@@ -75,7 +75,10 @@ async def _publisher(ctx=SlashContext, *, type = None, publisher = None):
         embed = discord.Embed(
             title="Results", description="", color=0xff0000)
         embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-        rand = [random.randint(0,len(retjson)) for i in range(5)]
+        if (len(retjson)>5):
+            rand = [random.randint(0,len(retjson)) for i in range(5)]
+        else:
+            rand = [random.randint(0,len(retjson)) for i in range(len(retjson))]
         for c in rand:
              embed.add_field(name=type, value=f"> Title: {retjson[c]['name']}\n> Media Type: {retjson[c]['media_type']}\n> \
                  Description: {retjson[c]['short_description']}\n> Genres: {retjson[c]['genres']}\n> Ratings: {retjson[c]['ratings']}\n> Review URL: {retjson[c]['review_url']}", inline=False)
