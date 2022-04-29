@@ -25,4 +25,37 @@ where row is the extraction from the SQLite Database.
 
 Here are the endpoints on the API and what they do:
 
+**Definition**
+
+`GET`, `POST`
+
+**\api\details**
+
+`POST`:
+
+```json
+    {
+        "slug" : slug
+    }
+```
+Any string entered is converted into a slug using the string function ```.lower().replace(' ','-')```
+
+`GET` :
+- `200 OK`
+
+```json
+[
+    {
+        "media_type" : row[1],
+        "name" : row[2],
+        "short_description" : row[5],
+        "long_description" : row[4],
+        "genres" : row[11],
+        "ratings" : row[9],
+        "review_url" : row[8],
+        "slug" : row[10],
+    }
+]
+```
+
 
