@@ -211,5 +211,5 @@ Any string entered is converted into the correct format using the string functio
 
 As an application of the backend server, I designed a Discord bot that uses the database and slash commands to become a media searcher and recommender. I also implemented a wishlist where users can add the media they like and view them later (Watch Later?).
 
-
+![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/Search.png?raw=true "search")
 
