@@ -1,5 +1,3 @@
-    Kunal's 8-bit Resume    body { padding-bottom: 50px; } .nes-progress { height: 25px; }
-
 Kunal Pai
 ---------
 
@@ -29,13 +27,8 @@ University of California, Davis
 *   Dean's List Fall 2020
 *   Dean's List Winter 2022
 
-### My Socials
-
-[](https://twitter.com/chaiwithpai)[](https://www.instagram.com/datboikunalpai/)[](https://github.com/kunpai)[](https://www.youtube.com/channel/UCJHSdcy8vV_CMmYS3Vo5jzg)
 
 ### Content Creation
-
-![](https://i.pinimg.com/564x/98/90/c3/9890c3080bc02e97059592b47cde487b.jpg)
 
 ### Chai with Pai
 
@@ -47,25 +40,10 @@ Podcaster
 
 *   Promoting on platforms like Instagram and Discord and sending cold emails.
 
- [Spotify](https://open.spotify.com/show/7mYzPI3yD4ZUYpiYGJ6ToK)
 
-![](https://i.pinimg.com/564x/3b/46/5e/3b465ec5eb9fa7bfd99218b31a95940d.jpg)
-
-### A Slice of Pai
-
-Blogger
-
-*   Blogging on a website with more than 3500 readers and 10 followers.
-
-*   Discussing about philosophy and musings in poetry and playwrighting.
-
-*   Promoting on platforms like Instagram and Reddit.
-
- [WordPress](http://asliceofkpai.wordpress.com)
 
 ### Previous Experience
 
-![](https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJyfEIT3kTn_4DqmHpoSqXMZd1sVQQVDbAojQw%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1)
 
 ### SiTime Corporation
 
@@ -91,29 +69,27 @@ Software Development Intern
 
 Programming Languages
 
-Python
+- Python
 
-C
+- C
 
-C++
+- C++
 
-HTML
+- HTML
 
-Golang
+- Golang
 
-LISP
+- LISP
 
-Prolog
+- Prolog
 
-Java
+- Java
 
-MATLAB
+- MATLAB
 
-CSS
+- CSS
 
 ### Organizations
-
-![](https://images.squarespace-cdn.com/content/v1/5e1f6fe959c69871b7eadcf6/1590532830922-3OO3OGBW0JXSQM3HBIHF/100767526_738343610272104_4648254585461276672_n.png?format=1500w)
 
 ### My State of Mind
 
@@ -125,7 +101,6 @@ Volunteer
 
 *   Suggesting topics of discussion relevant to Indian culture.
 
-![](https://i.pinimg.com/564x/be/21/a0/be21a0bda1340aa514874b7f30575d1c.jpg)
 
 ### Davis Entrepreneurial Society
 
@@ -139,16 +114,16 @@ Secondary Leader and Founder
 
 Languages
 
-English
+- English
 
-Hindi
+- Hindi
 
-Gujarati
+- Gujarati
 
-Spanish
+- Spanish
 
-Marathi
+- Marathi
 
-Konkani
+- Konkani
 
-私は思い出にはならないざ。[](mailto:pai.kunal05@gmail.com)
+私は思い出にはならないざ。
