@@ -211,35 +211,39 @@ Any string entered is converted into the correct format using the string functio
 
 As an application of the backend server, I designed a Discord bot that uses the database and slash commands to become a media searcher and recommender. I also implemented a wishlist where users can add the media they like and view them later (Watch Later?).
 
-1. **Definition**
-
-**/search**
+1. **/search**
 
 This command converts an entered string into a slug, and uses ```/api/details``` to get the results from the database.
 
 ![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/Search.png?raw=true "search")
 
-2. **Definition**
-
-**/recommend**
+2. **/recommend**
 
 This command converts an entered media type and genre into a title, and uses ```/api/recommend``` to get the results from the database.
 
 ![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/Recommend.png?raw=true "recommend")
 
-3. **Definition**
-
-**/publisher**
+3. **/publisher**
 
 This command converts an entered media type and publisher into a title, and uses ```/api/publisher``` to get the results from the database.
 
 ![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/Publisher.png?raw=true "publisher")
 
-4. **Definition**
-
-**/franchise**
+4. **/franchise**
 
 This command converts an entered media type and franchise into a title, and uses ```/api/mediafranchise``` to get the results from the database.
 
 ![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/Franchises.png?raw=true "franchises")
+
+5. **/add_media**
+
+This command converts an entered string into a slug, and uses ```/api/details``` to get the results from the database. It then creates a key-value pair, with the key being the Discord member ID, and the value as an array of the result media, which can be appended to with more calls of ```/add_media```
+
+![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/Add%20Media.png?raw=true "franchises")
+
+6. **/view_media**
+
+This command helps view the key-value pair created with the calls of ```/add_media```
+
+![Alt text](https://github.com/kunpai/Backend/blob/main/BotScreenshots/View%20Media.png?raw=true "franchises")
 
