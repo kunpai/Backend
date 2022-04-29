@@ -1,3 +1,4 @@
+from crypt import methods
 import sqlite3
 from unicodedata import name
 import requests
@@ -22,6 +23,17 @@ for row in df.itertuples():
 
 connection.commit()
 
+def get_db():
+    db = getattr(g, '_database', None)
+    if db is None:
+        db = g._database = sqlite3.connect(DATABASE)
+        cur = db.cursor()
+        create_table = "CREATE TABLE IF NOT EXISTS data (id NUMBER, media_type TEXT, name TEXT, short_name TEXT, long_description TEXT, short_description TEXT, created_at TEXT, updated_at TEXT, review_url TEXT, review_score NUMBER, slug TEXT, genres TEXT, created_by TEXT, published_by TEXT, franchises TEXT, regions TEXT)"
+        cur.execute(create_table)
+        db.commit()
+    db.row_factory = sqlite3.Row
+    return db
+
 ## ----------------------------------------- ##
 # Creating Flask app
 
@@ -35,22 +47,25 @@ app = Flask(__name__)
 @app.route("/api/details", methods= ['GET', 'POST'])
 def getDetails():
     name = request.get_json()['slug']
-    cur = DATABASE.cursor()
-    cur.execute("SELECT * FROM data WHERE slug LIKE ?", (name.lower().replace(' ','-')))
+    connection = sqlite3.connect(DATABASE)
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM data WHERE slug LIKE ?", [(name.lower().replace(' ','-'))])
     rows = cur.fetchall()
     results = []
     if len(rows)>0:
         for row in rows:
             row = {
-                'media_type' : row['media_type'],
-                'name' : row['name'],
-                'short_description' : row['short_description'],
-                'long_description' : row['long_description'],
-                'genres' : row['genres'],
-                'ratings' : row['ratings'],
-                'review_url' : row['review_url']
+                'media_type' : row[1],
+                'name' : row[2],
+                'short_description' : row[5],
+                'long_description' : row[4],
+                'genres' : row[11],
+                'ratings' : row[9],
+                'review_url' : row[8],
+                'slug' : row[10]
             }
             results.append(row)
+            break
         return Response(json.dumps(results),  mimetype='application/json')
 
     else:
@@ -65,24 +80,28 @@ def getDetails():
 def getRecommend():
     media_type = request.get_json()['media_type']
     genre = request.get_json()['genres']
-    cur = DATABASE.cursor()
-    cur.execute("SELECT * FROM data WHERE media_type LIKE ? AND genres LIKE %?%", (media_type.title(), genre.title()))
+    connection = sqlite3.connect(DATABASE)
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM data WHERE media_type LIKE ?", (media_type.title(),))
     rows = cur.fetchall()
     results = []
     if len(rows)>0:
         for row in rows:
             row = {
-                'media_type' : row['media_type'],
-                'name' : row['name'],
-                'short_description' : row['short_description'],
-                'long_description' : row['long_description'],
-                'genres' : row['genres'],
-                'ratings' : row['ratings'],
-                'review_url' : row['review_url']
+                'media_type' : row[1],
+                'name' : row[2],
+                'short_description' : row[5],
+                'long_description' : row[4],
+                'genres' : row[11],
+                'ratings' : row[9],
+                'review_url' : row[8],
+                'slug' : row[10]
             }
-            results.append(row)
+            if genre in row['genres']:
+                results.append(row)
         return Response(json.dumps(results),  mimetype='application/json')
-
+    if len(results) == 0:
+            return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
     else:
         return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
 
@@ -95,29 +114,106 @@ def getRecommend():
 def getPublished():
     media_type = request.get_json()['media_type']
     published_by = request.get_json()['published_by']
-    cur = DATABASE.cursor()
-    cur.execute("SELECT * FROM data WHERE media_type LIKE %?% AND published_by LIKE %?% ", (media_type.title(), published_by.title()))
+    connection = sqlite3.connect(DATABASE)
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM data WHERE media_type LIKE ?", (media_type.title(),))
     rows = cur.fetchall()
     results = []
     if len(rows)>0:
         for row in rows:
             row = {
-                'media_type' : row['media_type'],
-                'name' : row['name'],
-                'short_description' : row['short_description'],
-                'long_description' : row['long_description'],
-                'genres' : row['genres'],
-                'ratings' : row['ratings'],
-                'published_by' : row['published_by'],
-                'review_url' : row['review_url']
+                'media_type' : row[1],
+                'name' : row[2],
+                'short_description' : row[5],
+                'long_description' : row[4],
+                'genres' : row[11],
+                'ratings' : row[9],
+                'review_url' : row[8],
+                'slug' : row[10],
+                'published_by' : row[13]
             }
-            results.append(row)
+            if published_by in row['published_by']:
+                results.append(row)
+        if len(results) == 0:
+            return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
         return Response(json.dumps(results),  mimetype='application/json')
 
     else:
         return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
 
 ## ----------------------------------------- ##
+
+# Takes a franchise
+# Returns everything part of the Franchise
+
+@app.route("/api/franchise", methods = ['GET', 'POST'])
+def getFranchise():
+    franchise = request.get_json()['franchise']
+    connection = sqlite3.connect(DATABASE)
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM data")
+    rows = cur.fetchall()
+    results = []
+    if len(rows)>0:
+        for row in rows:
+            row = {
+                'media_type' : row[1],
+                'name' : row[2],
+                'short_description' : row[5],
+                'long_description' : row[4],
+                'genres' : row[11],
+                'ratings' : row[9],
+                'review_url' : row[8],
+                'slug' : row[10],
+                'published_by' : row[13],
+                'franchise': row[14]
+            }
+            if franchise in row['franchise']:
+                results.append(row)
+        if len(results) == 0:
+            return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
+        return Response(json.dumps(results),  mimetype='application/json')
+
+    else:
+        return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
+
+## ----------------------------------------- ##
+
+# Takes a media type and a franchise
+# Searches and returns results
+
+@app.route("/api/mediafranchise", methods = ['GET', 'POST'])
+def getMediaFranchise():
+    franchise = request.get_json()['franchise']
+    media_type = request.get_json()['media_type']
+    connection = sqlite3.connect(DATABASE)
+    cur = connection.cursor()
+    cur.execute("SELECT * FROM data WHERE media_type LIKE ?", (media_type.title(),))
+    rows = cur.fetchall()
+    results = []
+    if len(rows)>0:
+        for row in rows:
+            row = {
+                'media_type' : row[1],
+                'name' : row[2],
+                'short_description' : row[5],
+                'long_description' : row[4],
+                'genres' : row[11],
+                'ratings' : row[9],
+                'review_url' : row[8],
+                'slug' : row[10],
+                'published_by' : row[13],
+                'franchise': row[14]
+            }
+            if franchise in row['franchise']:
+                results.append(row)
+        if len(results) == 0:
+            return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
+        return Response(json.dumps(results),  mimetype='application/json')
+
+    else:
+        return Response(json.dumps({'error': 'No media found'}),  mimetype='application/json')
+
 
 # Running the application
 
