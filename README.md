@@ -13,7 +13,7 @@ I'm Kunal Pai. This is everything about me
 
 ### Education
 
-University of California, Davis
+*University of California, Davis*
 
 *   Computer Science and Engineering
 
@@ -44,7 +44,6 @@ Podcaster
 
 ### Previous Experience
 
-
 ### SiTime Corporation
 
 Technical Product Marketing Intern
@@ -54,8 +53,6 @@ Technical Product Marketing Intern
 *   Researched and presented potential customer bases in the optical transceiver industry worth $50 million.
 
 *   Designed an algorithm of distribution of partner margins to improve revenue of the company by $2.5 million.
-
-![](https://media-exp1.licdn.com/dms/image/C560BAQH99Hgy2xb-TA/company-logo_200_200/0/1627494550245?e=1648684800&v=beta&t=_VvAPQbX7oATiR2jvmyEHTw042Ra_EC7iX8N3C_MGU0)
 
 ### humanID
 
@@ -67,7 +64,7 @@ Software Development Intern
 
 *   Developing current pre-existing features for optimality.
 
-Programming Languages
+### Programming Languages
 
 - Python
 
@@ -112,7 +109,7 @@ Secondary Leader and Founder
 
 *   Conducted workshops on “Business Model Canvas”, “Elevator Pitch” and “Social Media Marketing”.
 
-Languages
+### Languages
 
 - English
 
@@ -126,4 +123,4 @@ Languages
 
 - Konkani
 
-私は思い出にはならないざ。
+### 私は思い出にはならないざ。
