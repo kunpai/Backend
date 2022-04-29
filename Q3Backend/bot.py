@@ -72,13 +72,11 @@ async def _publisher(ctx=SlashContext, *, type = None, publisher = None):
     try:
         retjson = requests.post(url=link, json={"media_type": type, "published_by": publisher})
         retjson = retjson.json()
+        print(retjson)
         embed = discord.Embed(
             title="Results", description="", color=0xff0000)
         embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-        if (len(retjson)>5):
-            rand = [random.randint(0,len(retjson)) for i in range(5)]
-        else:
-            rand = [random.randint(0,len(retjson)) for i in range(len(retjson))]
+        rand = [random.randint(0,len(retjson)) for i in range(5)]
         for c in rand:
              embed.add_field(name=type, value=f"> Title: {retjson[c]['name']}\n> Media Type: {retjson[c]['media_type']}\n> \
                  Description: {retjson[c]['short_description']}\n> Genres: {retjson[c]['genres']}\n> Ratings: {retjson[c]['ratings']}\n> Review URL: {retjson[c]['review_url']}", inline=False)
@@ -134,7 +132,7 @@ async def _franchise(ctx=SlashContext, *, franchise = None, media = None):
         embed = discord.Embed(
             title="Franchises", description="", color=0xff0000)
         embed.set_author(name=ctx.author.name, icon_url=ctx.author.avatar_url)
-        rand = [random.randint(0,len(retjson)) for i in range(5)]
+        rand = [random.randint(0,len(retjson)) for i in range(2)]
         for c in rand:
              embed.add_field(name=franchise, value=f"> Title: {retjson[c]['name']}\n> Media Type: {retjson[c]['media_type']}\n> \
                  Description: {retjson[c]['short_description']}\n> Genres: {retjson[c]['genres']}\n> Ratings: {retjson[c]['ratings']}\n> Review URL: {retjson[c]['review_url']}", inline=False)
@@ -144,4 +142,4 @@ async def _franchise(ctx=SlashContext, *, franchise = None, media = None):
         notfound = discord.Embed(title="Media not found", color=0x00ff00)
         return await ctx.send(embed=notfound)
 
-client.run(os.environ['TOKEN'])
+client.run('ODk5NTMxNTM5NTkzOTY5Njc0.GMJrIB.z2p8am7Yk0k-mZfaVZOA9NVYhaIELMVS272CLc')
